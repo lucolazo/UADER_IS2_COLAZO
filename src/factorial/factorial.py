@@ -6,28 +6,44 @@
 #* Creative commons                                                        *
 #*-------------------------------------------------------------------------*
 import sys
+
 def factorial(num):
     if num < 0:
         print("Factorial de un número negativo no existe")
         return 0
     elif num == 0:
         return 1
-
     else:
         fact = 1
-        while(num > 1):
+        while num > 1:
             fact *= num
             num -= 1
         return fact
 
 # Entrada
 if len(sys.argv) < 2:
-    entrada = input("Ingrese un número o rango (ej: 4-8): ")
+    entrada = input("Ingrese un número o rango (ej: 4-8, -10, 5-): ")
 else:
     entrada = sys.argv[1]
 
-# Caso rango
-if "-" in entrada:
+# Caso rango abierto: -10
+if entrada.startswith("-"):
+    desde = 1
+    hasta = int(entrada[1:])
+
+    for i in range(desde, hasta + 1):
+        print("Factorial", i, "es", factorial(i))
+
+# Caso rango abierto: 5-
+elif entrada.endswith("-"):
+    desde = int(entrada[:-1])
+    hasta = 60
+
+    for i in range(desde, hasta + 1):
+        print("Factorial", i, "es", factorial(i))
+
+# Caso rango normal: 4-8
+elif "-" in entrada:
     desde, hasta = entrada.split("-")
     desde = int(desde)
     hasta = int(hasta)
