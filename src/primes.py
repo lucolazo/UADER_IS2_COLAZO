@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 # Python program to display all the prime numbers within an interval
 
+# Este código calcula los números primos dentro de un rango dado.
+
 lower = 1
 upper = 500
 
