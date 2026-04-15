@@ -1,6 +1,13 @@
+# Este archivo no contiene código ejecutable, sino reglas para herramientas de desarrollo:
+
+# Configura el formateador automático de código para que el texto siempre sea legible y 
+siga un estándar de 88 caracteres por línea.
+
 [tool.black]
 line-length = 88
 target-version = ["py311"]
+
+# Configura un "linter" que busca errores comunes, variables no usadas o código redundante siguiendo las mejores prácticas de Python 3.11.
 
 [tool.ruff]
 line-length = 88

@@ -51,7 +51,8 @@ class TestRPNBasicOperations(unittest.TestCase):
 
 
 class TestRPNStackCommands(unittest.TestCase):
-    """Pruebas de comandos de manipulación de pila."""
+    """Pruebas de comandos de manipulación de pila.
+    dup (duplicar), swap (intercambiar) y drop (eliminar)."""
 
     def test_dup(self):
         self.assertEqual(rpn.evaluate("5 dup +"), 10.0)
@@ -160,7 +161,8 @@ class TestRPNFunctions(unittest.TestCase):
 
 
 class TestRPNTrigonometric(unittest.TestCase):
-    """Pruebas de funciones trigonométricas (en grados)."""
+    """Pruebas de funciones trigonométricas (en grados).
+    assertAlmostEqual para manejar decimales y evitar errores de precisión."""
 
     def test_sin(self):
         self.assertAlmostEqual(rpn.evaluate("90 sin"), 1.0)
@@ -201,7 +203,9 @@ class TestRPNTrigonometric(unittest.TestCase):
 
 
 class TestRPNMemory(unittest.TestCase):
-    """Pruebas de memorias y comandos STO / RCL."""
+    """Pruebas de memorias y comandos STO / RCL.
+    Asegura que el guardado y recuperación de datos en las 10 memorias
+    sea persistente durante la ejecución."""
 
     def setUp(self):
         # Reiniciar memorias antes de cada prueba
@@ -301,7 +305,10 @@ class TestRPNErrors(unittest.TestCase):
 
 
 class TestRPNMainFunction(unittest.TestCase):
-    """Pruebas de la función main() y entrada/salida."""
+    """Pruebas de la función main() y entrada/salida.
+    Utiliza Mocks (patch) para simular que un usuario escribe en la consola
+    o que el sistema operativo pasa argumentos, verificando que el programa
+    responda correctamente sin necesidad de ejecutarlo manualmente."""
 
     def test_main_with_command_line_argument(self):
         test_args = ["rpn.py", "3 4 +"]

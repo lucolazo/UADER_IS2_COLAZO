@@ -7,15 +7,17 @@ comandos de pila y memorias 00-09.
 import math
 import sys
 
-
+# Una excepción personalizada para capturar errores específicos (como división por cero
+# o falta de operandos) y mostrarlos amigablemente al usuario.
 class RPNError(Exception):
     """Excepción personalizada para errores de la calculadora RPN."""
 
 
-# Constantes predefinidas
+# Define constantes como π, e y el número áureo (φ).
 CONST = {"p": math.pi, "e": math.e, "j": (1 + math.sqrt(5)) / 2}  # φ
 
-# Funciones: (aridad, función)
+# Mapea nombres de funciones (como sin, sqrt, log) a su aridad (cuántos números necesita)
+# y su implementación matemática usando el módulo math o funciones lambda para operaciones específicas.
 FUNC = {
     "sqrt": (1, math.sqrt),
     "log": (1, math.log10),
@@ -33,7 +35,7 @@ FUNC = {
     "yx": (2, lambda y, x: y**x),
 }
 
-# Memorias 00-09
+# Un diccionario que simula 10 registros de memoria (00 al 09).
 MEM = {f"{i:02d}": 0.0 for i in range(10)}
 
 
@@ -57,6 +59,7 @@ def evaluate(expr):
         t = tokens[i]
 
         # Memoria separada: STO 01, RCL 09
+        # Gestiona comandos especiales como STO (guardar en memoria) y RCL (recuperar de memoria).
         if t.upper() in ("STO", "RCL"):
             if i + 1 >= len(tokens):
                 raise RPNError(f"Falta número de memoria tras '{t}'")
@@ -170,7 +173,9 @@ def evaluate(expr):
 
 
 def main():
-    """Punto de entrada principal. Acepta expresión por argumento o stdin."""
+    """Punto de entrada principal. Permite que la calculadora reciba datos de dos formas:
+    por argumentos de línea de comandos (ej. python rpn.py "3 4 +") o de forma interactiva
+    pidiendo un input()."""
     if len(sys.argv) > 1:
         expr = " ".join(sys.argv[1:])
     else:

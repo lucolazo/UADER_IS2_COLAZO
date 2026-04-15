@@ -2,6 +2,7 @@
 """
 Test funcional para rpn.py
 Ejecuta el programa como proceso externo y verifica salidas y códigos de retorno.
+A diferencia de las pruebas unitarias que llaman a funciones de Python, este archivo trata a rpn.py como un programa terminado.
 """
 
 import subprocess
@@ -61,7 +62,9 @@ test_cases = [
 ]
 
 def run_test(expression, expected_output, expected_retcode):
-    """Ejecuta rpn.py con la expresión y retorna (éxito, salida_obtenida, código_obtenido)."""
+    """Utiliza el módulo subprocess para ejecutar rpn.py con la expresión y retorna
+    (éxito, salida_obtenida, código_obtenido).
+    Captura la salida estándar (stdout) y los errores (stderr)."""
     cmd = [sys.executable, "rpn.py", expression]
     result = subprocess.run(cmd, capture_output=True, text=True)
     stdout = result.stdout.strip()
@@ -71,7 +74,8 @@ def run_test(expression, expected_output, expected_retcode):
     # Para errores, la salida relevante está en stderr; para éxito, en stdout
     output = stderr if expected_retcode != 0 else stdout
 
-    # Comparación flexible: para éxito numérico usamos isclose, para errores verificamos substring
+    # Comparación flexible: para éxito numérico usamos isclose (ej. 0.999999999 vs 1.0),
+    # para errores verificamos substring
     success = False
     if expected_retcode != 0:
         success = expected_output in output
