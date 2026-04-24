@@ -198,7 +198,7 @@ if __name__ == "__main__":
               .set_tren_aterrizaje("Tren de alta velocidad")
               .build())
 
-    print(f"✈️ Avión Fluent Interface:")
+    print(f"   Avión Fluent Interface:")
     print(f"   Body: {avion8.body}")
     print(f"   Turbinas: {avion8.turbinas}")
     print(f"   Alas: {avion8.alas}")
